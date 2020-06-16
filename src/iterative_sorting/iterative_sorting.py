@@ -28,25 +28,26 @@ def bubble_sort(arr):
                 arr[y + 1] = buff
     return arr
 
-'''
-STRETCH: implement the Count Sort function below
+# O(n) Runtime? Because it has to loops over everything in the array 2 times.
+def count_sort(arr, maximum=None):
+    # Initalize a dictionary so that we can hold the amount of times
+    #   an interger is seen in arr.
+    counts = {}
+    # Initalize final array to be return after sort.
+    final = []
 
-Counting sort is a sorting algorithm that works on a set of data where
-we specifically know the maximum value that can exist in that set of
-data. The idea behind this algorithm then is that we can create "buckets"
-from 0 up to the max value. This is most easily done by initializing an
-array of 0s whose length is the max value + 1 (why do we need this "+ 1"?).
-
-Each buckets[i] then is responsible for keeping track of how many times 
-we've seen `i` in the input set of data as we iterate through it.
-Once we know exactly how many times each piece of data in the input set
-showed up, we can construct a sorted set of the input data from the 
-buckets. 
-
-What is the time and space complexity of the counting sort algorithm?
-'''
-def counting_sort(arr, maximum=None):
-    # Your code here
-
-
-    return arr
+    # For each element in arr, check to see if it is in counts. If not, itialize and +1.. else just +1 the existing element in counts.
+    for n in arr:
+        if n < 0:
+            return "Error, negative numbers not allowed in Count Sort"
+        if n not in counts:
+            counts[n] = 0
+        counts[n] += 1
+        
+    # Map over counts and add n to final count times.
+    for n, count in sorted(counts.items()):
+        for i in range(count):
+            final.append(n)
+    
+    # Return final.
+    return final
